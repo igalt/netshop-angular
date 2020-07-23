@@ -1,1 +1,8 @@
-A single product
+<div class="card" data-product-id="${product.id}">
+    <img [src]="'assets/' + product.imageURL" class="card-img-top product">
+    <div class="card-body">
+        <h6 [title]="product.name">{{product.name}}</h6>
+        <h6>{{product.price}}</h6>
+        <button class="btn"><i class="fas fa-cart-plus" aria-hidden="true"></i> Cart</button>
+    </div>
+</div>
