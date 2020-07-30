@@ -1,7 +1,7 @@
 import { Product } from "./product";
 import { Customer } from "./customer";
 
-class ShoppingCart{
+export class ShoppingCart{
     products: Product[];
     checkedOut: boolean;
 
@@ -34,7 +34,6 @@ class ShoppingCart{
         });
         return sum;
     }
-
 
     checkout(customer: Customer): void{
         if (customer.balance >= this.totalPrice){

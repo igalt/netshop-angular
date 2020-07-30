@@ -2,7 +2,6 @@ const VAT = 1.17;
 
 export class Product{
     constructor(public id: string, public name: string, private _price: number, public imageURL: string, public shippableTo: string[] , public category: string, public hasVAT: boolean = true){
-        
     }
 
     get price(): number{

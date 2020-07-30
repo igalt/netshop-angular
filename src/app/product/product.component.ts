@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { DataService } from '../data.service';
+import { ShoppingCart } from '../models/shoppingCart';
 import { Product } from '../models/product';
 
 @Component({
@@ -10,9 +12,12 @@ import { Product } from '../models/product';
 export class ProductComponent implements OnInit {
   @Input() product: Product;
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
   }
 
+  addToCart(product): void{
+    this.dataService.cart.addProduct(product);
+  }
 }

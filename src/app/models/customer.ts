@@ -1,6 +1,4 @@
 export class Customer{
-
-    
     constructor(public id: string, public name: string, public balance: number, public imageURL: string){
     }
 
@@ -13,7 +11,3 @@ export class Customer{
     }
 }
 
-let c = new Customer("", "", 150, "");
-let c2: Customer;
-c2 = Customer.fromJSON({id: "aaa", name: "bbb", balance:150,imageURL: "afdg"});
-c.buy(123)

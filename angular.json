@@ -25,7 +25,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/netshop.scss"
+              "src/netshop.scss",
+              "src/variables.scss"
             ],
             "scripts": []
           },
