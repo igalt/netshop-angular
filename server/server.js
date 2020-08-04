@@ -21,6 +21,10 @@ mongoose.connect(mongoURL, { useNewUrlParser: true })
         .catch(err => console.error(err));
         
 
+// *****
+// Products
+// *****
+
 // a Schema is a way of defining how our data looks like in MongoDB
 // Supported types are: 
 // String, Number, Date, 
@@ -112,3 +116,90 @@ app.delete('/api/products/:id', (req,res) =>{
            }
          });
 }); 
+
+// *****
+// Customers
+// *****
+
+const customerSchema = new mongoose.Schema({
+  name: String,
+  balance: Number,
+  imageURL: String,
+  isAdmin: Boolean
+});
+
+const Customer = mongoose.model('Customer', customerSchema); // Product is a class
+
+app.get('/api/customers', (req, res) =>{
+  Customer.find()
+         .then(data => res.send(data));
+});
+
+app.get('/api/customers/:id', (req, res) =>{
+  let reqId = req.params.id; 
+  Customer.findById(reqId)
+         .then(data => {
+           if (data){
+              res.send(data)
+           } else{
+              res.status(404).send(`404: customer #${req.params.id} wasn't found`);
+           }
+         });
+
+});
+
+app.post('/api/customers', (req, res) =>{
+  // creating a new product based on our Model
+  let newCustomer = new Customer({
+    name: req.body.name,
+    balance: req.body.balance,
+    imageURL: req.body.imageURL,
+    isAdmin: req.body.isAdmin  
+  });
+
+  newCustomer.save() // returns a promise
+         .then(() => {
+            res.send(newCustomer)
+         })
+         .catch((err) => console.error(err))
+});
+ 
+
+// *****
+// Cart
+// *****
+
+
+
+const cartSchema = new mongoose.Schema({
+  customer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Customer'
+  },
+  products: [{
+              type: mongoose.Schema.Types.ObjectId,
+              ref: 'Product'
+            }],
+  checkedOut: Boolean
+});
+
+const Cart = mongoose.model('Cart', cartSchema); // Product is a class
+
+app.get('/api/carts', (req, res) =>{
+  Cart.find()
+      .populate('customer products')
+      .then(data => res.send(data));
+});
+
+app.get('/api/carts/:id', (req, res) =>{
+  let reqId = req.params.id; 
+  Cart.findById(reqId)
+    .then(data => {
+      if (data){
+        res.send(data)
+      } else{
+        res.status(404).send(`404: cart #${req.params.id} wasn't found`);
+      }
+  });
+
+});
