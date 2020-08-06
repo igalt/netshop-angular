@@ -17,12 +17,13 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     //debugger;
-    console.log('cart component init');
 
+    // 
     this.cart = this.dataService.cart;
   }
 
   removeFromCart(product: Product): void{
+    debugger;
     this.cart.removeProduct(product);
   }
 

@@ -5,7 +5,7 @@ const cors = require('cors');
 // Initializing Server
 const app = express(); //express is a function that returns an instance
 
-//app.use(cors()) // enabling cross origin requests
+app.use(cors()) // enabling cross origin requests
 app.use(express.json()); // this makes it easier to process JSON requests 
 //app.use(express.static('client')); // serving  our front-end client files with this server
 
@@ -131,7 +131,7 @@ const customerSchema = new mongoose.Schema({
 const Customer = mongoose.model('Customer', customerSchema); // Product is a class
 
 app.get('/api/customers', (req, res) =>{
-  Customer.find()
+  Customer.findOne()
          .then(data => res.send(data));
 });
 
@@ -169,8 +169,7 @@ app.post('/api/customers', (req, res) =>{
 // Cart
 // *****
 
-
-
+/* By Ref
 const cartSchema = new mongoose.Schema({
   customer: {
     type: mongoose.Schema.Types.ObjectId,
@@ -180,6 +179,17 @@ const cartSchema = new mongoose.Schema({
               type: mongoose.Schema.Types.ObjectId,
               ref: 'Product'
             }],
+  checkedOut: Boolean
+});
+*/
+
+/* Embedding objects */
+const cartSchema = new mongoose.Schema({
+  customer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Customer'
+  },
+  products: [productSchema],
   checkedOut: Boolean
 });
 
@@ -194,6 +204,7 @@ app.get('/api/carts', (req, res) =>{
 app.get('/api/carts/:id', (req, res) =>{
   let reqId = req.params.id; 
   Cart.findById(reqId)
+    .populate('customer products')
     .then(data => {
       if (data){
         res.send(data)
@@ -201,5 +212,23 @@ app.get('/api/carts/:id', (req, res) =>{
         res.status(404).send(`404: cart #${req.params.id} wasn't found`);
       }
   });
-
 });
+
+app.post('/api/carts', (req, res) =>{
+  // creating a new product based on our Model
+  let newCart = new Cart({
+    checkedOut: req.body.checkedOut,
+    customer: req.body.customerId,
+    products: req.body.products
+  });
+
+  newCart.save() // returns a promise
+         .then(() => {
+            res.send(newCart)
+         })
+         .catch((err) => {
+           console.error(err);
+           res.send(err);
+         })
+});
+ 
