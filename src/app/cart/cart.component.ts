@@ -16,15 +16,12 @@ export class CartComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    //debugger;
-
-    // 
-    this.cart = this.dataService.cart;
+    this.dataService.cartFetched.subscribe( cart => this.cart = cart)
+    
   }
 
   removeFromCart(product: Product): void{
-    debugger;
-    this.cart.removeProduct(product);
+    this.dataService.removeFromCart(product);
   }
 
 }

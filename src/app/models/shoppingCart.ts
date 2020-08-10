@@ -5,7 +5,9 @@ export class ShoppingCart{
     products: Product[];
     checkedOut: boolean;
 
-    constructor(products?: Product[], checkedOut?: boolean){
+    constructor(public id: string, products?: Product[], checkedOut?: boolean){
+        this.id = id;
+
         if (products){
             this.products = products;
         } else {this.products = []}
@@ -18,8 +20,13 @@ export class ShoppingCart{
         this.checkedOut = false;
     }
 
-    addProduct(product: Product): void{
-        this.products.push(product);
+    addProduct(product: Product): boolean{
+        // first check if the product doesn't already exist in cart
+        if (!this.products.find(prod => prod.id === product.id)){
+            this.products.push(product);
+            return true;
+        }
+        return false;
     }
 
     removeProduct(product: Product): void{
@@ -64,8 +71,8 @@ export class ShoppingCart{
         }
     }
 
-    static fromJSON(jsonCart: {checkedOut: boolean, products: any[]}): ShoppingCart{
-       let cart = new ShoppingCart([], jsonCart.checkedOut );
+    static fromJSON(jsonCart: {id: string; checkedOut: boolean, products: any[]}): ShoppingCart{
+       let cart = new ShoppingCart(jsonCart.id, [], jsonCart.checkedOut);
 
         if (jsonCart.products && jsonCart.products.length > 0){
         

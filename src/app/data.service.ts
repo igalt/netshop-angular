@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 import { Product } from './models/product';
 import { ShoppingCart} from './models/shoppingCart';
 import { Customer} from './models/customer';
+import { from } from 'rxjs';
 
 
 @Injectable({
@@ -12,12 +14,17 @@ export class DataService {
   readonly serverURL = "http://localhost:8000/api/";
   readonly productsURL = this.serverURL + "products";
   readonly customersURL = this.serverURL + "customers";
-  
-  public cart: ShoppingCart;
+  readonly cartsURL = this.serverURL + "carts";
 
+  public cartFetched = new EventEmitter();
+
+  public cart: ShoppingCart;
+  
   constructor() { 
-    // TODO: get from server
-    this.cart = new ShoppingCart([], false);
+    this.getCart().then(cart => {
+      this.cart = cart;
+      this.cartFetched.emit(this.cart);
+    });
   }
 
   getProducts(): Promise<Product[]>{
@@ -38,7 +45,48 @@ export class DataService {
       });
     }
 
-  addToCart(product){
-    this.cart.addProduct(product)
+  getCart(): Promise <ShoppingCart>{
+    return fetch(`${this.cartsURL}/5f2942bbb2b9b7625012e3f9`)
+      .then(response => { return response.json()})
+      .then(jsonCart => { 
+        return Promise.resolve (ShoppingCart.fromJSON(jsonCart));
+      });
+  }
+    
+  addToCart(product: Product): void{
+    // add product to the model
+    let isAdded = this.cart.addProduct(product)
+    
+    if (isAdded){
+      // add product to the DB
+      fetch(`${this.cartsURL}/5f2942bbb2b9b7625012e3f9/products` , {          
+        // Adding method type 
+        method: "POST", 
+          
+        // Adding body or contents to send 
+        body: JSON.stringify({ 
+            productId: product.id
+        }), 
+          
+        // Adding headers to the request 
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        } 
+      }).then(res =>console.log('product added to cart'))
+        .catch(err => console.error(err));
+      }
+
+  }
+
+  removeFromCart(product: Product){
+    this.cart.removeProduct(product);
+
+     // removing product to the DB
+     fetch(`${this.cartsURL}/5f2942bbb2b9b7625012e3f9/products/${product.id}` , {          
+      method: "DELETE"        
+    }).then(res =>console.log('product removed from cart'))
+      .catch(err => console.error(err));
+
+
   }
 }

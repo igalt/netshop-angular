@@ -21,7 +21,9 @@ export class CustomerComponent implements OnInit {
     this.dataService.getCustomer()
                     .then(customer => this.customer = customer);
     
-    this.cart = this.dataService.cart;
+    this.dataService.cartFetched
+                    .subscribe( cart => this.cart = cart)
+    
   }
 
 }

@@ -22,8 +22,6 @@ export class ProductListComponent implements OnInit {
 
       this.artProducts = this.products.filter(prod => prod.category == "arts");
       this.fashionProducts = this.products.filter(prod => prod.category == "fashion");
-
-
     });
   }
 }
