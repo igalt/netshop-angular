@@ -11,11 +11,11 @@ const app = express(); //express is a function that returns an instance
 
 app.use(cors()) // enabling cross origin requests
 app.use(express.json()); // this makes it easier to process JSON requests 
-app.use(express.static(__dirname + '/dist')); // serving  our front-end client files with this server
+//app.use(express.static(__dirname + '/dist')); // serving  our front-end client files with this server
 
-app.all('*', (req,res) =>{
+/*app.all('*', (req,res) =>{
    res.status(200).sendFile(__dirname + '/dist/index.html');
-});
+});*/
       
 app.listen(8000, () => console.log('Netshop API is listening on port 8000... '));
       
@@ -60,7 +60,8 @@ app.post('/api/customers', customers.createNew);
 // Cart
 // *****
 
-app.get('/api/carts',carts.getAll);
+
+app.get('/api/carts', carts.getAll);
 
 app.get('/api/carts/:id', carts.getById);
 

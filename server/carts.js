@@ -11,15 +11,16 @@ const cartSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Customer'
   },
-  products: [{
-              type: mongoose.Schema.Types.ObjectId,
-              ref: 'Product'
-            }],
+  products: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product'
+    }],
   checkedOut: Boolean
 });
 
 
-/* Embedding objects 
+/* Embedding the product object 
 const cartSchema = new mongoose.Schema({
     customer: {
       type: mongoose.Schema.Types.ObjectId,
@@ -32,9 +33,8 @@ const cartSchema = new mongoose.Schema({
 
 exports.cartSchema = cartSchema;
 
-const Cart = mongoose.model('Cart', cartSchema); // Product is a class
+const Cart = mongoose.model('Cart', cartSchema);
 
-exports.Cart = Cart;
 
 exports.getAll = (req, res) =>{
     Cart.find()
@@ -59,7 +59,7 @@ exports.createNew = (req, res) =>{
     // creating a new product based on our Model
     let newCart = new Cart({
       checkedOut: false,
-      customer: [],
+      customer: null,
       products: []
     });
   
@@ -77,7 +77,9 @@ exports.addProduct = (req,res) =>{
     Cart.findById(req.params.id).then(cart => {
         if (cart){
             cart.products.push(req.body.productId);
-            cart.save();
+            cart.save()
+                .then(() => res.send(`Product ${req.body.productId} was created in cart ${req.params.id}`));
+
         } else{
             res.status(404).send(`404: cart #${req.params.id} wasn't found`);
         }
@@ -89,7 +91,7 @@ exports.removeProduct = (req,res) =>{
     if (cart){
       cart.products.pull(req.params.productid);
       cart.save()
-          .then(() => res.send(`${req.params.productid} removed succesfully`));
+          .then(() => res.send(`${req.params.productid} removed succesfully from  cart ${req.params.id}`));
     } else{
       res.status(404).send(`404: cart #${req.params.id} wasn't found`);
     }
