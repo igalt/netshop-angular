@@ -16,11 +16,11 @@ app.use(express.static(path.resolve("dist/Netshop-angular"))); // serving  our f
 
 
       
-app.listen(8000, () => console.log('Netshop API is listening on port 8000... '));
+app.listen(process.env.PORT || 5000, () => console.log('Netshop API is listening on port 8000... '));
       
 // connecting to MongoDB
 //const mongoURL = "mongodb://localhost/netshopDB"; // connection string
-const mongoURL = "mongodb+srv://igal:12081982@mycluster-lgiw8.mongodb.net/netShopDB";
+const mongoURL = "mongodb+srv://igal:12081982@mycluster-lgiw8.mongodb.net/netS  hopDB";
 
 mongoose.set('useUnifiedTopology', true);
 
