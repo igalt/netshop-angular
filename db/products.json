@@ -1,0 +1,201 @@
+[{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde2"
+  },
+  "name": "Wave Poster",
+  "price": 80,
+  "imageURL": "img/arts1.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde3"
+  },
+  "name": "Eye Gazer",
+  "price": 120,
+  "imageURL": "img/arts2.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": false,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde4"
+  },
+  "name": "Scenic Stones",
+  "price": 150,
+  "imageURL": "img/arts3.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde5"
+  },
+  "name": "Fractal",
+  "price": 140,
+  "imageURL": "img/arts4.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": false,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde6"
+  },
+  "name": "Tribal #1",
+  "price": 200,
+  "imageURL": "img/arts5.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde7"
+  },
+  "name": "Tribal #2",
+  "price": 250,
+  "imageURL": "img/arts6.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": false,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde8"
+  },
+  "name": "Abstract Painting",
+  "price": 70,
+  "imageURL": "img/arts7.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cde9"
+  },
+  "name": "Geometric Patterns",
+  "price": 90,
+  "imageURL": "img/arts8.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": true,
+  "category": "arts"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cdea"
+  },
+  "name": "Dog Jacket",
+  "price": 35,
+  "imageURL": "img/fashion9.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "fashion"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cdeb"
+  },
+  "name": "Drink Beer t-shirt",
+  "price": 13,
+  "imageURL": "img/fashion10.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": false,
+  "category": "fashion"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cdec"
+  },
+  "name": "Sports Jacket",
+  "price": 70,
+  "imageURL": "img/fashion11.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "fashion"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cded"
+  },
+  "name": "Psychedelic t-shirt",
+  "price": 50,
+  "imageURL": "img/fashion12.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": false,
+  "category": "fashion"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cdee"
+  },
+  "name": "Elegant Jacket",
+  "price": 150,
+  "imageURL": "img/fashion13.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "fashion"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cdef"
+  },
+  "name": "Sports Jacket",
+  "price": 220,
+  "imageURL": "img/fashion14.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": false,
+  "category": "fashion"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cdf0"
+  },
+  "name": "White Top",
+  "price": 60,
+  "imageURL": "img/fashion15.jpg",
+  "shippableTo": [
+    "Israel"
+  ],
+  "hasVAT": true,
+  "category": "fashion"
+},{
+  "_id": {
+    "$oid": "5efdc705cd4f263ef402cdf1"
+  },
+  "name": "Corona Cap",
+  "price": 15,
+  "imageURL": "img/fashion16.jpg",
+  "shippableTo": [
+    "Israel",
+    "France"
+  ],
+  "hasVAT": false,
+  "category": "fashion"
+}]

@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "5f2694f833397e26108042e4"
+  },
+  "name": "Igal",
+  "balance": 500,
+  "imageURL": "img/igal.jpg",
+  "isAdmin": false
+},{
+  "_id": {
+    "$oid": "5f2694f833397e26108042e5"
+  },
+  "name": "admin",
+  "balance": 99999,
+  "imageURL": "img/igal.jpg",
+  "isAdmin": true
+},{
+  "_id": {
+    "$oid": "5f293ad819500a69e454de4d"
+  },
+  "name": "Shimon",
+  "balance": 4001,
+  "imageURL": "img/shimon.jpg",
+  "isAdmin": false
+},{
+  "_id": {
+    "$oid": "5f296809f25c053ba44f141d"
+  }
+},{
+  "_id": {
+    "$oid": "5f3018b5caa24e0a9828b5ad"
+  },
+  "name": "moshe",
+  "imageURL": "http://mashu",
+  "balance": 500
+}]
