@@ -20,7 +20,7 @@ app.listen(process.env.PORT || 8000, () => console.log('Netshop API is listening
       
 // connecting to MongoDB
 //const mongoURL = "mongodb://localhost/netshopDB"; // connection string
-const mongoURL = "mongodb+srv://igal:12081982@mycluster-lgiw8.mongodb.net/netS  hopDB";
+const mongoURL = "mongodb+srv://igal:12081982@mycluster-lgiw8.mongodb.net/netShopDB";
 
 mongoose.set('useUnifiedTopology', true);
 
