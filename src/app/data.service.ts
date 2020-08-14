@@ -4,7 +4,6 @@ import { EventEmitter } from '@angular/core';
 import { Product } from './models/product';
 import { ShoppingCart} from './models/shoppingCart';
 import { Customer} from './models/customer';
-import { from } from 'rxjs';
 
 
 @Injectable({
@@ -21,6 +20,7 @@ export class DataService {
   public cart: ShoppingCart;
   
   constructor() { 
+
     this.getCart().then(cart => {
       this.cart = cart;
       this.cartFetched.emit(this.cart);
@@ -59,20 +59,18 @@ export class DataService {
     
     if (isAdded){
       // add product to the DB
-      fetch(`${this.cartsURL}/5f2942bbb2b9b7625012e3f9/products` , {          
+      fetch(`${this.cartsURL}/5f2942bbb2b9b7625012e3f9/products`, {          
         // Adding method type 
         method: "POST", 
-          
         // Adding body or contents to send 
         body: JSON.stringify({ 
             productId: product.id
-        }), 
-          
+        }),     
         // Adding headers to the request 
         headers: { 
             "Content-type": "application/json; charset=UTF-8"
         } 
-      }).then(res =>console.log('product added to cart'))
+      }).then(response => console.log(response))
         .catch(err => console.error(err));
       }
 
