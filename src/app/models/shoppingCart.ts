@@ -42,13 +42,14 @@ export class ShoppingCart{
         return sum;
     }
 
-    checkout(customer: Customer): void{
+    checkout(customer: Customer): boolean{
         if (customer.balance >= this.totalPrice){
             customer.buy(this.totalPrice);
             this.checkedOut = true;
-        }else{
-            throw new Error("customer ain't got the money");
+            this.products = [];
+            return true;
         }
+        return false;
     }
 
     ship(country: string): boolean{

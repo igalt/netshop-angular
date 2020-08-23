@@ -7,6 +7,11 @@ const customerSchema = new mongoose.Schema({
     isAdmin: Boolean
 });
 
+// this duplicates the "_id" field as an "id" field in JSON
+customerSchema.set('toJSON', {
+    virtuals: true
+});
+
 exports.customerSchema = customerSchema;
 
 const Customer = mongoose.model('Customer', customerSchema); // Product is a class
@@ -45,3 +50,18 @@ exports.createNew = (req, res) =>{
            })
            .catch((err) => console.error(err));
 };
+
+exports.update = (req,res) => {
+    Customer.findById(req.params.id).then(cust => {
+        if (cust){
+          cust.name = req.body.name;
+          cust.balance = req.body.balance;
+          cust.imageURL = req.body.imageURL;
+          cust.isAdmin = req.body.isAdmin;
+
+          cust.save().then(() => {res.send(JSON.stringify(cust))})
+        } else{
+          res.status(404).send(`404: customer #${req.params.id} wasn't found`);
+        }
+      });
+}

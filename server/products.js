@@ -16,7 +16,7 @@ const productSchema = new mongoose.Schema({
 
 // this duplicates the "_id" field as an "id" field in JSON
 productSchema.set('toJSON', {
-virtuals: true
+    virtuals: true
 });
 
   

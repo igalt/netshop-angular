@@ -55,6 +55,7 @@ app.get('/api/customers/:id', customers.getById);
 
 app.post('/api/customers', customers.createNew);
  
+app.put('/api/customers/:id', customers.update)
 
 // *****
 // Cart
@@ -67,10 +68,11 @@ app.get('/api/carts/:id', carts.getById);
 
 app.post('/api/carts', carts.createNew);
 
-app.post('/api/carts/:id/products', carts.addProduct)
+app.post('/api/carts/:id/products', carts.addProduct);
 
-app.delete('/api/carts/:id/products/:productid', carts.removeProduct)
- 
+app.delete('/api/carts/:id/products/:productid', carts.removeProduct);
+
+app.put('/api/carts/:id', carts.checkOut);
 
 
 app.all('*', (req,res) =>{

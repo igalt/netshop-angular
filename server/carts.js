@@ -19,7 +19,10 @@ const cartSchema = new mongoose.Schema({
   checkedOut: Boolean
 });
 
-
+// this duplicates the "_id" field as an "id" field in JSON
+cartSchema.set('toJSON', {
+  virtuals: true
+});
 /* Embedding the product object 
 const cartSchema = new mongoose.Schema({
     customer: {
@@ -92,6 +95,17 @@ exports.removeProduct = (req,res) =>{
       cart.products.pull(req.params.productid);
       cart.save()
           .then(() => res.send(`${req.params.productid} removed succesfully from  cart ${req.params.id}`));
+    } else{
+      res.status(404).send(`404: cart #${req.params.id} wasn't found`);
+    }
+  });
+}
+
+exports.checkOut = (req, res) =>{
+  Cart.findById(req.params.id).then(cart => {
+    if (cart){
+      cart.checkedOut = true;
+      cart.save().then(() => {res.send(JSON.stringify(cart))})
     } else{
       res.status(404).send(`404: cart #${req.params.id} wasn't found`);
     }

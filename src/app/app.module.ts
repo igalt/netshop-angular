@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
@@ -17,6 +18,7 @@ import { CustomerComponent } from './customer/customer.component';
     CustomerComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     FontAwesomeModule
   ],

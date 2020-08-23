@@ -18,7 +18,8 @@ export class DataService {
   public cartFetched = new EventEmitter();
 
   public cart: ShoppingCart;
-  
+  public customer: Customer;
+
   constructor() { 
 
     this.getCart().then(cart => {
@@ -41,7 +42,8 @@ export class DataService {
     return fetch(this.customersURL)
       .then(response => { return response.json()})
       .then(jsonCust => { 
-        return Promise.resolve (new Customer(jsonCust.id, jsonCust.name, jsonCust.balance, jsonCust.imageURL))
+         this.customer = new Customer(jsonCust.id, jsonCust.name, jsonCust.balance, jsonCust.imageURL, jsonCust.isAdmin);
+         return Promise.resolve(this.customer);
       });
     }
 
@@ -86,5 +88,42 @@ export class DataService {
       .catch(err => console.error(err));
 
 
+  }
+
+  checkoutCart(email: string, shippingCountry: string){  
+      // updating cart
+      fetch(`${this.cartsURL}/5f2942bbb2b9b7625012e3f9`, {          
+        // Adding method type 
+        method: "PUT", 
+        // Adding body or contents to send 
+        body: JSON.stringify({ 
+            email: email
+        }),     
+        // Adding headers to the request 
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        } 
+      }).then(response => console.log(response))
+        .catch(err => console.error(err));
+      
+      //updating customer
+      fetch(`${this.customersURL}/${this.customer.id}`, {          
+        // Adding method type 
+        method: "PUT", 
+        // Adding body or contents to send 
+        body: JSON.stringify({ 
+            name: this.customer.name,
+            balance: this.customer.balance,
+            imageURL: this.customer.imageURL,
+            isAdmin: this.customer.isAdmin
+        }),     
+        // Adding headers to the request 
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        } 
+      }).then(response => console.log(response))
+        .catch(err => console.error(err));
+    
+    return true;
   }
 }
